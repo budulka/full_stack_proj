@@ -1,0 +1,6 @@
+frontend/.env
+nest-backend/.env
+frontend/node_modules
+frontend/.idea
+nest-backend/node_modules
+nest-backend/dist

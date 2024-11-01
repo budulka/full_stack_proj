@@ -1,0 +1,54 @@
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: pidor
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: hstr
+    ports:
+      - "5433:5432"
+
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pidor -d hstr -p 5432"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - app-network
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  nest-backend:
+    build: ./nest-backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: "postgresql://pidor:123@postgres:5432/hstr?schema=public"
+    networks:
+      - app-network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    command: /bin/sh -c "npx prisma migrate deploy && npm run start:dev"
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+
+
+  backend:
+    build: ./backend
+    ports:
+      - "3000:3000"
+    networks:
+      - app-network
+
+
+networks:
+  app-network:
+
+volumes:
+  postgres-data:
