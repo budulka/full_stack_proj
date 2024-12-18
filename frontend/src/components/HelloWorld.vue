@@ -21,8 +21,8 @@
     <p style= "margin:0">Prediction: {{ prediction }}</p>
   </div>
 </template>
-
 <script>
+
 import axiosInstance from "../../axios.config.js";
 export default {
   data() {

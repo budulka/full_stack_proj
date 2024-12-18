@@ -104,7 +104,7 @@ export default {
   left: 0;
   width: 300px;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(155, 155, 155, 0.8);
   box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
   z-index: 2;
 }
