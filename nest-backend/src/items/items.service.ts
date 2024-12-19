@@ -28,7 +28,7 @@ export class ItemsService {
   async get_predicton(img: Express.Multer.File) {
     const form = new FormData();
     form.append("image", img.buffer, img.originalname);
-    const response = await axios.post("http://backend:3000/predict", form, {
+    const response = await axios.post("https://backend-production-23f1.up.railway.app/predict", form, {
       headers: {
         ...form.getHeaders(),
       },
